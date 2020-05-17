@@ -1,18 +1,18 @@
 <template>
-  <div id="app">
+  <div>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-  components: {
-  }
+  name: 'App'
 }
 </script>
 
-<style>
+<style lang="less">
+// 以下两种都可以，任君选择
+// @import './styles/base.less';
 
+@import url("~@/styles/base.less");
 </style>
