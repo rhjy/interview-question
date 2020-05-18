@@ -1,0 +1,54 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+html,
+body,
+#app {
+  height: 100%;
+}
+.login-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: linear-gradient(225deg, #1493fa, #01c6fa);
+}
+.login-container .left {
+  width: 478px;
+  height: 550px;
+  padding: 48px;
+  background-color: #f5f5f5;
+}
+.login-container .left .title-box {
+  display: flex;
+  align-items: center;
+}
+.login-container .left .title-box img {
+  width: 22px;
+  height: 17px;
+  margin-right: 16px;
+}
+.login-container .left .title-box .title {
+  font-size: 24px;
+  margin-right: 14px;
+}
+.login-container .left .title-box .line {
+  width: 1px;
+  height: 28px;
+  background-color: #ccc;
+  display: inline-block;
+}
+.login-container .left .title-box .sub-title {
+  font-size: 22px;
+  margin-left: 14px;
+}
+.login-container .left .login-form {
+  margin-top: 29px;
+}
+.login-container .left .login-form .captcha {
+  width: 100%;
+}
