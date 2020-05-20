@@ -9,8 +9,12 @@ Vue.config.productionTip = false
 
 import router from '@/router'
 
+
 //导入element 
 import "@/plugins/element.js"
+
+//导入axios
+import "@/utils/request"
 
 new Vue({
   render: h => h(App),
