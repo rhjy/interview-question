@@ -20,7 +20,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item prop="code">
-          <el-row :gutter="22">
+          <el-row :gutter="16">
             <el-col :span="16">
               <el-input v-model="loginForm.code" prefix-icon="el-icon-key" placeholder="请输入验证码"></el-input>
             </el-col>
@@ -74,7 +74,7 @@ export default {
           {
             validator: (rule, value, callback) => {
               if (!value) {
-                callback("请输入是手机号");
+                callback("请输入手机号");
                 return;
               }
               const reg = /^1[3456789][0-9]{9}$/;
