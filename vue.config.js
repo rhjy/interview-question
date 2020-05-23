@@ -6,7 +6,9 @@
   
 // }
 
+// module.exports{
+//  lintOnSave: false
+// }
 
-// lintOnSave: false
 
 // 以上是关闭eslint的代码

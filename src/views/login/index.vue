@@ -35,7 +35,13 @@
           <el-link type="primary" href="www.baidu.com">隐私条款</el-link>
         </el-form-item>
         <el-form-item>
-          <el-button @click="loginClick" style="width:100%" size="medium" type="primary">登录</el-button>
+          <el-button
+            @click="loginClick"
+            @keyup="loginClick"
+            style="width:100%"
+            size="medium"
+            type="primary"
+          >登录</el-button>
         </el-form-item>
         <el-form-item>
           <el-button style="width:100%" size="medium" type="primary" @click="register">注册</el-button>
@@ -52,12 +58,12 @@
 
 <script>
 //保存token
-import {setToken} from "@/utils/token"
+import { setToken } from "@/utils/token";
 //调用子组件
-import register from "./register"
+import register from "./register";
 export default {
   name: "Login",
-  components:{
+  components: {
     register
   },
   data() {
@@ -138,30 +144,32 @@ export default {
       // });
 
       // async异步做法(async和await搭配使用)
-      this.$refs.loginFormRef.validate(async (valid) => {
+      this.$refs.loginFormRef.validate(async valid => {
         if (!valid) {
           return;
         }
-        const res =await this.$axios({
+        const res = await this.$axios({
           method: "post",
           url: "/login", //登陆地址
           data: this.loginForm
         });
-        console.log(res);
-        
+        // console.log(res);
+
         if (res.data.code == 200) {
           // 提醒
           this.$message.success("登陆成功");
           //保存token
-          setToken(res.data.data.token)
+          setToken(res.data.data.token);
+          //路由跳转到后台管理页面
+          this.$router.push("/layout");
         } else {
           this.$message.error(res.data.message);
           this.getCode(); //重新获取验证码
         }
       });
     },
-    register(){
-      this.$refs.register.dialogVisible = true
+    register() {
+      this.$refs.register.dialogVisible = true;
     }
   },
   created() {
