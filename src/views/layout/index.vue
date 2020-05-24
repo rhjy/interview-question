@@ -1,8 +1,9 @@
 <template>
   <el-container class="layout">
+    <!-- 顶部栏 -->
     <el-header class="header">
       <div class="left">
-        <i class="el-icon-s-fold setheight"></i>
+        <i class="el-icon-s-fold setheight" @click="isCollapse = !isCollapse"></i>
         <img src="@/assets/layout_icon.png" class="marginlr" alt />
         <span class="title">黑马面面</span>
       </div>
@@ -13,14 +14,41 @@
       </div>
     </el-header>
     <el-container>
-      <el-aside>
-        <!-- Aside content -->
-        左边导航
+      <!-- 左边导航部分 -->
+      <el-aside style="width: auto;">
+        <!-- :router="true"开启嵌套路由  index="/layout/chart"设置二级路由地址-->
+        <el-menu
+          :router="true"
+          :default-active="defaultActive"
+          class="el-menu-vertical-demo"
+          :collapse="isCollapse"
+        >
+          <el-menu-item index="/layout/chart">
+            <i class="el-icon-pie-chart"></i>
+            <span slot="title">数据预览</span>
+          </el-menu-item>
+          <el-menu-item index="/layout/user">
+            <i class="el-icon-user"></i>
+            <span slot="title">用户列表</span>
+          </el-menu-item>
+          <el-menu-item index="/layout/enterprise">
+            <i class="el-icon-office-building"></i>
+            <span slot="title">企业列表</span>
+          </el-menu-item>
+          <el-menu-item index="/layout/question">
+            <i class="el-icon-edit-outline"></i>
+            <span slot="title">题库列表</span>
+          </el-menu-item>
+          <el-menu-item index="/layout/subject">
+            <i class="el-icon-notebook-2"></i>
+            <span slot="title">学科列表</span>
+          </el-menu-item>
+        </el-menu>
       </el-aside>
-
+      <!-- 右面主体部分 -->
       <el-main>
-        <!-- Main content -->
-        主体
+        <!-- 嵌套路由 -->
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -31,8 +59,10 @@ import { removeToken } from "@/utils/token";
 export default {
   data() {
     return {
-      username: "",
-      avatar: ""
+      isCollapse: false, //menu是否展开
+      username: "", //用户名字
+      avatar: "", //用户头像
+      defaultActive: "" //当前路由值
     };
   },
   methods: {
@@ -73,6 +103,7 @@ export default {
     }
   },
   created() {
+    this.defaultActive = this.$route.fullPath;
     this.getUserInfo();
   }
 };
@@ -115,17 +146,20 @@ export default {
       }
     }
   }
-  .el-aside {
-    background-color: #d3dce6;
-    color: #333;
-    text-align: center;
-    line-height: 200px;
-  }
   .el-main {
-    background-color: #e9eef3;
-    color: #333;
-    text-align: center;
-    line-height: 160px;
+    background-color: #e8e9ec;
+  }
+  .el-menu {
+    border-right: 0px solid #e6e6e6;
+    list-style: none;
+    position: relative;
+    margin: 0;
+    padding-left: 0;
+    background-color: #fff;
+  }
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
   }
 }
 </style>
