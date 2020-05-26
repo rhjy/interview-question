@@ -78,14 +78,15 @@ export default {
       rules: {
         phone: [
           {
+            required: true,
             validator: (rule, value, callback) => {
               if (!value) {
-                callback("请输入手机号");
+                callback(new Error("请输入手机号"));
                 return;
               }
               const reg = /^1[3456789][0-9]{9}$/;
               if (!reg.test(value)) {
-                callback("请输入正确的手机号码");
+                callback(new Error("请输入正确的手机号码"));
                 return;
               } else {
                 callback();
