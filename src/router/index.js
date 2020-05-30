@@ -11,7 +11,12 @@ import User from "@/views/layout/user"
 import Enterprise from "@/views/layout/enterprise"
 import Question from "@/views/layout/question"
 import Subject from "@/views/layout/subject"
- 
+import Welcome from "@/views/layout/welcome"
+
+import Child1 from "../test/parent-child/child1.vue"
+import Child2 from "../test/parent-child/child2.vue"
+import Parent from "../test/parent-child/parent.vue"
+
 //获得token函数
 import { getToken } from "@/utils/token"
 
@@ -20,12 +25,19 @@ const router = new VueRouter({
     { path: "/", redirect: "/login" },
     { path: "/login", component: Login },
     {
+      path: "/parent", component: Parent, children: [
+        { path: 'child1', component: Child1 },
+        { path: 'child2', component: Child2 },
+      ]
+    },
+    {
       path: "/layout", component: Layout, children: [
-        {path:'chart',component:Chart}, //嵌套路由不用加/
-        {path:'user',component:User},
-        {path:'enterprise',component:Enterprise},
-        {path:'question',component:Question},
-        {path:'subject',component:Subject},
+        { path: 'chart', component: Chart }, //嵌套路由不用加/
+        { path: 'user', component: User },
+        { path: 'enterprise', component: Enterprise },
+        { path: 'question', component: Question },
+        { path: 'subject', component: Subject },
+        { path: 'welcome', component: Welcome },
       ]
     },
   ],

@@ -30,8 +30,9 @@
           </el-row>
         </el-form-item>
         <el-form-item prop="isCheck">
-          <el-checkbox v-model="loginForm.isCheck"></el-checkbox>我已阅读并同意
-          <el-link type="primary" href="www.baidu.com">用户协议</el-link>和
+          <el-checkbox v-model="loginForm.isCheck" label="我已阅读并同意"></el-checkbox>
+          <el-link type="primary" href="www.baidu.com">用户协议</el-link>
+          <span>和</span>
           <el-link type="primary" href="www.baidu.com">隐私条款</el-link>
         </el-form-item>
         <el-form-item>
@@ -179,5 +180,5 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 </style>

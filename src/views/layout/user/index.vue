@@ -40,7 +40,7 @@
         </el-table-column>
         <el-table-column label="操作" width="280px">
           <template slot-scope="scope">
-            <el-button type="primary" @click="editUser(scope.row.id)">编辑</el-button>
+            <el-button type="primary" @click="editUser(scope.row)">编辑</el-button>
             <el-button
               @click="changeStatus(scope.row.id,scope.row.status)"
               :type="scope.row.status==0?'success':'info'"
@@ -49,17 +49,16 @@
           </template>
         </el-table-column>
       </el-table>
-      <div style="margin-top:25px;text-align:center">
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="page"
-          :page-sizes="[2, 5, 10, 20]"
-          :page-size="limit"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total"
-        ></el-pagination>
-      </div>
+      <el-pagination
+        style="margin-top:25px;text-align:center"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="page"
+        :page-sizes="[2, 5, 10, 20]"
+        :page-size="limit"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      ></el-pagination>
     </el-card>
     <userAddOrUpdata ref="userAddOrUpdata"></userAddOrUpdata>
   </div>
@@ -116,7 +115,7 @@ export default {
       // this.searchForm.username = '',
       // this.searchForm.email = '',
       // this.searchForm.role_id = '',
-      // Element提供的重置表单方法,注意表单项要绑定prop属性
+      // Element提供的重置表单方法,注意每个表单项el-from-item要绑定prop属性
       this.$refs.searchForm.resetFields();
       this.search();
     },
@@ -150,7 +149,7 @@ export default {
             url: "/user/remove",
             data: { id }
           });
-          console.log(res);
+          // console.log(res);
           if (res.data.code == 200) {
             this.$message.success(`账号:${username}已被删除!`);
             this.search();
@@ -180,15 +179,23 @@ export default {
       //把user-add-or-updata子组件的dialogVisible的值改为true就可以显示出增加组件
       this.$refs.userAddOrUpdata.dialogVisible = true;
       this.$refs.userAddOrUpdata.mode = "add";
-
+      this.$nextTick(() => {
+        this.$refs.userAddOrUpdata.$refs.addForm.resetFields(); //打开表单前清空表单
+      });
     },
     //编辑用户
-    editUser(id) {
+    editUser(info) {
       //把user-add-or-updata子组件的dialogVisible的值改为true就可以显示出增加组件
       this.$refs.userAddOrUpdata.dialogVisible = true;
       this.$refs.userAddOrUpdata.mode = "edit";
-      this.$refs.userAddOrUpdata.id = id;
-
+      // this.$refs.userAddOrUpdata.userinfo =JSON.parse(JSON.stringify(info));//直接对象展开赋值//深拷贝(重新创建一个数据)
+      // this.$refs.userAddOrUpdata.userinfo ={...info};//直接对象展开赋值//深拷贝一层(重新创建一个数据)
+      // this.$refs.userAddOrUpdata.userinfo =info;//直接对象展开赋值//浅拷贝(只是把地址赋值)
+      this.$nextTick(() => {
+        this.$refs.userAddOrUpdata.$refs.addForm.resetFields(); //打开表单前清空表单
+        this.$refs.userAddOrUpdata.addForm = { ...info };
+      });
+      // console.log(info);
     }
   },
   created() {

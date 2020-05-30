@@ -17,12 +17,16 @@
       <!-- 左边导航部分 -->
       <el-aside style="width: auto;">
         <!-- :router="true"开启嵌套路由  index="/layout/chart"设置二级路由地址-->
-        <el-menu
+        <el-menu 
           :router="true"
           :default-active="defaultActive"
           class="el-menu-vertical-demo"
           :collapse="isCollapse"
         >
+          <el-menu-item index="/layout/welcome">
+            <i class="el-icon-user"></i>
+            <span slot="title">个人资料</span>
+          </el-menu-item>
           <el-menu-item index="/layout/chart">
             <i class="el-icon-pie-chart"></i>
             <span slot="title">数据预览</span>

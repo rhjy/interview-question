@@ -19,3 +19,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+src/test/parent-child/parent.vue
+src/test/parent-child/bus.js
+src/test/parent-child/child1.vue
+src/test/parent-child/child2.vue
