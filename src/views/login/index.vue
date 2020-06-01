@@ -9,11 +9,11 @@
       </div>
       <el-form :model="loginForm" class="login-form" ref="loginFormRef" :rules="rules">
         <el-form-item prop="phone">
-          <el-input v-model="loginForm.phone" prefix-icon="el-icon-user" placeholder="请输入手机号"></el-input>
+          <el-input v-model.trim="loginForm.phone" prefix-icon="el-icon-user" placeholder="请输入手机号"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
-            v-model="loginForm.password"
+            v-model.trim="loginForm.password"
             prefix-icon="el-icon-lock"
             placeholder="请输入密码"
             show-password
@@ -22,7 +22,12 @@
         <el-form-item prop="code">
           <el-row :gutter="16">
             <el-col :span="16">
-              <el-input v-model="loginForm.code" prefix-icon="el-icon-key" placeholder="请输入验证码"></el-input>
+              <el-input
+                v-model="loginForm.code"
+                @keyup.enter.native="loginClick"
+                prefix-icon="el-icon-key"
+                placeholder="请输入验证码"
+              ></el-input>
             </el-col>
             <el-col :span="8">
               <img class="captcha" :src="codeURL" @click="getCode" alt />
@@ -36,13 +41,7 @@
           <el-link type="primary" href="www.baidu.com">隐私条款</el-link>
         </el-form-item>
         <el-form-item>
-          <el-button
-            @click="loginClick"
-            @keyup="loginClick"
-            style="width:100%"
-            size="medium"
-            type="primary"
-          >登录</el-button>
+          <el-button @click="loginClick" style="width:100%" size="medium" type="primary">登录</el-button>
         </el-form-item>
         <el-form-item>
           <el-button style="width:100%" size="medium" type="primary" @click="register">注册</el-button>
@@ -120,6 +119,7 @@ export default {
     };
   },
   methods: {
+    //获得验证码
     getCode() {
       this.codeURL =
         process.env.VUE_APP_BASEURL +

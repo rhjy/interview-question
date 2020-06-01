@@ -79,7 +79,7 @@ export default {
         avatar: [{ required: true, message: "头像为空", trigger: "blur" }],
         username: [
           { required: true, message: "用户名不能为空", trigger: "blur" },
-          { max: "6" }
+          { min: 1, max: 8, message: "用户名最小1位,最大8位", trigger: "blur" }
         ],
         email: [
           { required: true, message: "请输入邮箱地址", trigger: "blur" },

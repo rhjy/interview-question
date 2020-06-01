@@ -9,13 +9,13 @@
     <div slot="title" class="title">{{mode == "add" ? "新增用户":"编辑用户" }}</div>
     <el-form :model="addForm" ref="addForm" label-width="80px" :rules="rules">
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="addForm.username"></el-input>
+        <el-input v-model.trim="addForm.username"></el-input>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="addForm.email"></el-input>
+        <el-input v-model.trim="addForm.email"></el-input>
       </el-form-item>
       <el-form-item label="电话" prop="phone">
-        <el-input v-model="addForm.phone"></el-input>
+        <el-input v-model.trim="addForm.phone"></el-input>
       </el-form-item>
       <el-form-item label="角色" prop="role_id">
         <el-select v-model="addForm.role_id" placeholder="请选择">
@@ -60,7 +60,6 @@ export default {
       rules: {
         username: [
           { required: true, message: "用户名不能为空", trigger: "blur" },
-          { max: "6" }
         ],
         email: [
           { required: true, message: "邮箱地址不能为空", trigger: "blur" },

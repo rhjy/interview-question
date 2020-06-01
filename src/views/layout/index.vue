@@ -97,7 +97,7 @@ export default {
             method: "get",
             url: "/logout"
           });
-          console.log(res);
+          // console.log(res);
           if (res.data.code == 200) {
             removeToken(); //删除token
             this.$router.push("/login");
